@@ -9,7 +9,7 @@ The sum of the 2 stats most be 8
 
 Each round the player rolls
 *   speed + d6
-*    and then a d6 - agility and it is the difference of the speed
+*    and then a d6 - agility and the difference between them is taken form speed
 
 The horse moves
 
