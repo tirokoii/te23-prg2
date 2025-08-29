@@ -1,5 +1,5 @@
 Speed 1-6
-stamina 1-10
+stamina 1-6
 6 rounds, furthest
 
 Player chooses a horse with a pretty name
@@ -11,6 +11,6 @@ Each round the player rolls
 *   speed + d6
 *    and then a d6 - agility and the difference between them is taken form speed
 
-The horse moves
+The horse moves a couple of steps each round.
 
 The horse must reach 50 in sum to arrive in goal

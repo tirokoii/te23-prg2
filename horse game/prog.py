@@ -4,46 +4,23 @@ from time import sleep
 player_horse = {
     "name": "",
     "speed": 100,
-    "agility": 100,
-    "steps": 0
+    "agility": 100
 }
 
-names = ["Poppy", "Derek", "Speedy", "Capitalist", "Shower"]
+name_parts = ["ai", "tech", "lord", "evil", "clanker", "pony", "horse", "oat", "datorpony", "poppy", "derek", "speedy", "capitalist", "shower"]
 
-# def game_loop(horses):
-#     print("------------------------------")
-#     for horse in horses:
-#         speed = horse["speed"] + random.randint(1,6)
-#         agility = horse["agility"] - random.randint(1,6)
-#         horse["steps"] += speed + agility
-#         print(f"{horse["name"]}: {horse["steps"]}")
-#     print("------------------------------")
-#     sleep(1)
-
-def game_loop():
-    while horses[0]["steps"] < 60 and horses[1]["steps"] < 60 and horses[2]["steps"] < 60 and horses[3]["steps"] < 60:
-        print("------------------------------")
-        for horse in horses:
-            speed = horse["speed"] + random.randint(1,6)
-            agility = horse["agility"] - random.randint(1,6)
-            horse["steps"] += speed + agility
-            print(f"{horse["name"]}: {horse["steps"]}")
-        print("------------------------------")
-        sleep(1)  
-    
-
-def horse():
-    total = 8
-    name = random.choice(names)
-    speed = random.randint(1, 6)
-    agility = total - speed
-    horse_stats = {
-        "name": name,
+def create_computer_horse():
+    speed = random.randint(2, 6)
+    name = random.choice(name_parts)
+    name_parts.remove(name)
+    agility = 8 - speed
+    horse = {
+        "name": name.capitalize(),
         "speed": speed,
-        "agility": agility,
-        "steps": 0
+        "agility": agility
     }
-    return horse_stats
+    return horse
+
 
 def input_int(prompt):
     while True:
@@ -52,25 +29,47 @@ def input_int(prompt):
         except ValueError:
             print("Invalid input, you can only use numbers")
 
-
-player_horse['name'] = input("What is your horse name: ")
+player_horse['name'] = input("What is your horse name: ").capitalize()
 
 while player_horse["speed"] + player_horse["agility"] != 8:
-    while player_horse["speed"] < 1 or player_horse["speed"] > 6:
-        player_horse["speed"] = input_int(f"What is {player_horse['name']}s speed (1-6): ")
-    player_horse["agility"] = input_int(f"What is {player_horse['name']}s agility (1-6): ")
+    while player_horse["speed"] < 2 or player_horse["speed"] > 6:
+        player_horse["speed"] = input_int(f"What is {player_horse['name']}'s speed (2-6): ")
+    player_horse["agility"] = input_int(f"What is {player_horse['name']}'s agility (2-6): ")
 
-horsey_one = horse()
-horsey_two = horse()
-horsey_three = horse()
 
-horses = [player_horse, horsey_one, horsey_two, horsey_three]
+computer_horse = create_computer_horse()
 
-total_laps = 0
+print(player_horse)
+print(computer_horse)
 
-# for i in range(1, 7):
-#     total_laps += 1
-#     print(f"Lap {total_laps}")
-#     game_loop(horses)
+def game_turn():
+    player_speed = player_horse["speed"] = random.randint(1, 6)
+    player_agility = random.randint(1, 6) - player_horse["agility"]
+    if player_agility >= 0:
+        player_speed = player_speed - player_agility
+    
+    computer_speed = computer_horse["speed"] = random.randint(1, 6)
+    computer_agility = random.randint(1, 6) - player_horse["agility"]
+    if computer_agility >= 0:
+        computer_speed = computer_speed - computer_agility
+    
+    print(f"Player horse {player_horse['name']} runs {player_speed} in")
+    print(f"Player horse {computer_horse['name']} is steps {computer_speed} in")
+    return [player_speed, computer_speed]
 
-game_loop()
+player_steps = 0
+computer_steps = 0
+
+for i in range(1, 11):
+    steps = game_turn()
+    player_steps += steps[0]
+    computer_steps += steps[1]
+
+print(f"Antal steg: {player_horse['name']} {player_steps}, {computer_horse['name']} {computer_steps}")
+
+if player_steps < computer_steps:
+    print(f"{computer_horse['name']} won!")
+elif player_steps > computer_steps:
+    print(f"{player_horse['name']} wins!!!")
+else:
+    print(f"{player_horse['name']} and {computer_horse['name']} tied!")
