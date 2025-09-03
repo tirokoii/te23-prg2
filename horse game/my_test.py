@@ -31,7 +31,7 @@ def game_loop():
             agility = horse["agility"] - random.randint(1,6)
             if total_rounds == random.randint(1, 10):
                 agility -= random.randint(2, 4)
-                print(f"{horse["name"]}'s agility is reduced")
+                print(f"{horse["name"]} slowed down to eat grass!")
             horse["steps"] += speed + agility
             print(f"{horse["name"]}: {horse["steps"]}")
         print("------------------------------")

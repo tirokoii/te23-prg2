@@ -29,13 +29,21 @@ def input_int(prompt):
         except ValueError:
             print("Invalid input, you can only use numbers")
 
+def input_clamp(stat_name, prompt, clamp = 6):
+    while player_horse[stat_name] < 1 or player_horse[stat_name] > clamp:
+        player_horse[stat_name] = input_int(prompt)
+
+
 player_horse['name'] = input("What is your horse name: ").capitalize()
 
-while player_horse["speed"] + player_horse["agility"] != 8:
-    while player_horse["speed"] < 2 or player_horse["speed"] > 6:
-        player_horse["speed"] = input_int(f"What is {player_horse['name']}'s speed (2-6): ")
-    player_horse["agility"] = input_int(f"What is {player_horse['name']}'s agility (2-6): ")
+STATS_OK = False
 
+while STATS_OK is False:
+    input_clamp("speed", "Whats you horse speed(1-6): ")
+    input_clamp("agility", "Whats you horse agility(1-6): ")
+
+    if player_horse["speed"] + player_horse["agility"] == 8:
+        STATS_OK = True
 
 computer_horse = create_computer_horse()
 
