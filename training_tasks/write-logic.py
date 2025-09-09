@@ -13,10 +13,10 @@ for i in range(amount_people):
     people_dict[name] = animal
     people_list.append(people_dict[name])
 
-for i in range(people_dict):
-    if people_dict[name] == "Cat":
+for key in people_dict: # key.
+    if key[name] == "Cat":
         cat_counter += 1
-    elif people_dict[name] == "Dog":
+    elif key[name] == "Dog":
         dog_counter += 1
 
 print(f"There are {cat_counter} cat lovers")
