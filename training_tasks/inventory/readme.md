@@ -1,0 +1,5 @@
+Jag har gjort ett simpelt inventory, med funktioner så att man kan lägga till items och ta bort, men även inspektera.
+Det första inventory försöket app.py var inspererat av blasphemous spelen, men gick inte särskilt bra, eftersom det var för komplicerat för mina kunskaper inom programmering, men det blev för mycket att hantera. Eftersom att det var flera sub klasser som avgjorde vad som skulle hända. Istället för att göra om det första skapade jag bara ett enklare inventory.
+Men grunden för de båda var densamma, jag skapade en plan eller tanke på draw.io där jag la till klasserna och de funktionerna jag ville att dem skulle ha. Sedan började jag programmera utifrån dem, ibland la jag även till extra funktioner i planen utifrån de behov jag stötte på.
+
+Jag behöver jobba på och lära mig mer om klasser, men även om hur man gör klassificeringar och generaliseringar av saker. Samt vilka funktioner som ska ingå i dem klasserna. 

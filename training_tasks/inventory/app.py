@@ -96,4 +96,4 @@ class Relics:
     def remove_item(self, relic):
         self.content.remove(relic)
 
-# Dammit, jbfebiarhbqerfhiorbgiuqerghargmqcnvhtbwyuqibgyuiöpwbvfvuibvfyuawkbftyceaycarvgbialrefbvhvjbagihebaöibaoirvlgagpäarg
+# Jbfebiarhbqerfhiorbgiuqerghargmqcnvhtbwyuqibgyuiöpwbvfvuibvfyuawkbftyceaycarvgbialrefbvhvjbagihebaöibaoirvlgagpäarg
