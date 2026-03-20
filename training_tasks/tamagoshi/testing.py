@@ -6,3 +6,5 @@ class Test():
 te = Test()
 te.conditions["happy"] = True
 print(te.conditions["happy"])
+
+print((round(60/10)))
