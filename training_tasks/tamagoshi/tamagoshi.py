@@ -43,16 +43,18 @@ class Tamagoshi():
     def feed(self):
         self.health = min(self.max_health, self.health + max(10, random.randint(1, 10) * 2))
         self.happiness = min(self.max_happiness, self.happiness + max(10, random.randint(1, 4) * 4))
-        self.hunger = max(0, self.hunger - max(15, random.randint(1, 6) * 4))
+        self.hunger = max(0, self.hunger + max(15, random.randint(1, 6) * 4))
         self.conditions["is_bored"] = True
         self.conditions["is_mess"] = True
         self.conditions["is_playful"] = False
+        self.conditions["is_angry"] = False
     
     def play(self):
         self.conditions["is_bored"] = False
         self.conditions["is_playful"] = False
+        self.conditions["is_angry"] = False
         self.happiness = min(self.max_happiness, self.happiness + max(11, random.randint(1, 5) * 4))
-        self.hunger = min(self.max_hunger, self.hunger + max(10, random.randint(1 ,10) * 2))
+        self.hunger = max(0, self.hunger - max(10, random.randint(1 ,10) * 2))
 
         chance_of_mess = random.randint(1, 10)
 
@@ -67,10 +69,11 @@ class Tamagoshi():
         self.hunger = min(self.max_hunger, self.hunger + max(5, random.randint(1, 4) * 3))
     
     def clean(self):
+        self.conditions["is_mess"] = False
         self.conditions["is_bored"] = True
         self.conditions["is_scared"] = True
         self.conditions["is_playful"] = True
-        self.happiness = min(self.max_happiness, self.happiness + max(11, random.randint(1, 5) * 4))
+        self.happiness = max(0, self.happiness - max(11, random.randint(1, 5) * 4))
     
     def go_to_vet(self):
         self.happiness = max(0, self.health - max(20, random.randint(1, 6) * 4))
@@ -79,10 +82,10 @@ class Tamagoshi():
         self.conditions["is_mess"] = True
     
     def health_check(self):
-        if self.hunger < self.max_hunger/2:
-            self.health = max(0, self.health - max(10, random.randint(3, 8) * round(self.max_hunger / self.hunger)))
+        if self.hunger < self.max_hunger / 2:
+            self.health = max(0, self.health - max(10, random.randint(3, 8) * 5))
         if self.happiness < self.max_happiness / 1.2:
-            self.health = max(0, self.health - max(5, random.randint(1, 4) * round(self.max_happiness / self.happiness)))
+            self.health = max(0, self.health - max(5, random.randint(1, 4) * 2))
 
         # Add in rounds for if_mess so that the amount of rounds that it is a mess it gets sick
 
@@ -103,6 +106,7 @@ class Tamagoshi():
 
                 print(self.name + " " + condition_sentence + ", you need to do something")
         print(f"{self.name} has {self.happiness}/{self.max_happiness} happiness, {self.hunger}/{self.max_hunger} hunger and {self.health}/{self.max_health} health")
+        self.health_check()
         # Add in rounds to have condition actually do something depending on how many rounds the pet has had it
 
 class Game():
@@ -117,6 +121,7 @@ class Game():
         if self.pet.is_alive == False:
             self.game_state = "wait"
         if self.game_state == "wait":
+            print(f"You killed {self.pet.name}")
             print("Do you want to continue? [y/n]")
             choice = input(" ")
             if choice == "y":
@@ -197,7 +202,9 @@ class Game():
                     continuing = False
             self.round += 1
 
+        print(f"{self.pet.name} has grown one year older! Its now {self.pet.age}")
         self.pet.age += 1
+        self.round = 0
     
 
 game = Game()
@@ -207,4 +214,4 @@ while game.game_state != "quit":
         game.start_game()
         game.game_state = "running"
     game.game_loop()
-    
+
